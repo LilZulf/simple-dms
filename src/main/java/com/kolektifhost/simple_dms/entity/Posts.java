@@ -25,6 +25,9 @@ public class Posts {
     private Long user_id;
     private String title;
     private String content;
+    private String slug;
+    private Long parent_id;
+    private Boolean is_active;
 
     public Posts() {
     }
@@ -66,6 +69,30 @@ public class Posts {
 
     public void setContent(String content) {
         this.content = content;
+    }
+
+    public String getSlug() {
+        return slug;
+    }
+
+    public String setSlug(String slug) {
+        return this.slug = slug;
+    }
+
+    public Long getParent_id() {
+        return parent_id;
+    }
+
+    public void setParent_id(Long parent_id) {
+        this.parent_id = parent_id;
+    }
+
+    public Boolean getIs_active() {
+        return is_active;
+    }
+
+    public void setIs_active(Boolean is_active) {
+        this.is_active = is_active;
     }
 
 }
