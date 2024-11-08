@@ -9,6 +9,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.kolektifhost.simple_dms.dto.PostRequest;
 import com.kolektifhost.simple_dms.entity.Posts;
 import com.kolektifhost.simple_dms.repository.PostsRepository;
 
@@ -47,7 +48,17 @@ public class PostsService {
      * @param posts the post to save
      * @return the saved post
      */
-    public Posts savePosts(Posts posts) {
+    public Posts savePosts(PostRequest postsRequest) {
+        Posts posts = new Posts();
+
+        posts.setUserId(postsRequest.getUser_id());
+        posts.setTitle(postsRequest.getTitle());
+        posts.setContent(postsRequest.getContent());
+
+        posts.setSlug(postsRequest.getSlug().orElse(""));
+        posts.setParent_id(postsRequest.getParent_id().orElse(null));
+        posts.setIs_active(postsRequest.getIs_active().orElse(true));
+
         return postsRepository.save(posts);
     }
 

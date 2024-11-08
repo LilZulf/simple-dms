@@ -13,12 +13,16 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.kolektifhost.simple_dms.dto.PostRequest;
 import com.kolektifhost.simple_dms.dto.ResponseData;
 import com.kolektifhost.simple_dms.entity.Posts;
 import com.kolektifhost.simple_dms.service.PostsService;
+
+import jakarta.validation.Valid;
 
 /**
  *
@@ -47,7 +51,7 @@ public class PostsController {
     }
 
     @PostMapping
-    public ResponseEntity<ResponseData<Posts>> savePost(Posts post) {
+    public ResponseEntity<ResponseData<Posts>> savePost(@Valid @RequestBody PostRequest post) {
         try {
             Posts savedPost = postsService.savePosts(post);
             return ResponseEntity.ok(new ResponseData<>(true, "Post saved successfully", 200, savedPost));
@@ -57,7 +61,7 @@ public class PostsController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<ResponseData<Posts>> updatePost(Posts post) {
+    public ResponseEntity<ResponseData<Posts>> updatePost(@Valid @RequestBody PostRequest post) {
         try {
             Posts updatedPost = postsService.savePosts(post);
             return ResponseEntity.ok(new ResponseData<>(true, "Post updated successfully", 200, updatedPost));

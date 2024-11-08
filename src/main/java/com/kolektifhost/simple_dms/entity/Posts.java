@@ -32,11 +32,14 @@ public class Posts {
     public Posts() {
     }
 
-    public Posts(Long id, Long user_id, String title, String content) {
+    public Posts(Long id, Long user_id, String title, String content, String slug, Long parent_id, Boolean is_active) {
         this.id = id;
         this.user_id = user_id;
         this.title = title;
         this.content = content;
+        this.slug = slug;
+        this.parent_id = parent_id;
+        this.is_active = is_active;
     }
 
     public Long getId() {
