@@ -32,6 +32,8 @@ public class PostRequest {
 
     private Optional<Boolean> is_active = Optional.empty();
 
+    private Long id;
+
     public String getTitle() {
         return title;
     }
@@ -112,6 +114,21 @@ public class PostRequest {
      */
     public void setIs_active(Optional<Boolean> is_active) {
         this.is_active = is_active;
+    }
+
+
+    /**
+     * @return Long return the id
+     */
+    public Long getId() {
+        return id;
+    }
+
+    /**
+     * @param id the id to set
+     */
+    public void setId(Long id) {
+        this.id = id;
     }
 
 }

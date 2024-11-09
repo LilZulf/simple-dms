@@ -29,7 +29,7 @@ public class PostsService {
      * @return a list of all posts
      */
     public List<Posts> findAll() {
-        return postsRepository.findAll();
+        return postsRepository.findActivePosts();
     }
 
     /**
@@ -49,7 +49,16 @@ public class PostsService {
      * @return the saved post
      */
     public Posts savePosts(PostRequest postsRequest) {
-        Posts posts = new Posts();
+        Posts posts;
+
+        if (postsRequest.getId() != null) {
+            // Update existing post
+            posts = postsRepository.findById(postsRequest.getId())
+                    .orElseThrow(() -> new RuntimeException("Post not found"));
+        } else {
+            // Create new post
+            posts = new Posts();
+        }
 
         posts.setUserId(postsRequest.getUser_id());
         posts.setTitle(postsRequest.getTitle());
@@ -70,6 +79,11 @@ public class PostsService {
     public Posts deletePosts(Posts posts) {
         postsRepository.delete(posts);
         return posts;
+    }
+
+    public Posts softDeletePosts(Posts posts) {
+        posts.setIs_active(false);
+        return postsRepository.save(posts);
     }
 
 }

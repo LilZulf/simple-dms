@@ -61,8 +61,9 @@ public class PostsController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<ResponseData<Posts>> updatePost(@Valid @RequestBody PostRequest post) {
+    public ResponseEntity<ResponseData<Posts>> updatePost(@PathVariable Long id, @Valid @RequestBody PostRequest post) {
         try {
+            post.setId(id);
             Posts updatedPost = postsService.savePosts(post);
             return ResponseEntity.ok(new ResponseData<>(true, "Post updated successfully", 200, updatedPost));
         } catch (Exception e) {
@@ -73,7 +74,7 @@ public class PostsController {
     @DeleteMapping("/{id}")
     public ResponseEntity<ResponseData<Posts>> deletePost(@PathVariable Long id) {
         try {
-            Posts deletedPost = postsService.deletePosts(postsService.getById(id));
+            Posts deletedPost = postsService.softDeletePosts(postsService.getById(id));
             return ResponseEntity.ok(new ResponseData<>(true, "Post deleted successfully", 200, deletedPost));
         } catch (Exception e) {
             return ResponseEntity.ok(new ResponseData<>(false, e.getMessage(), 500, null));
