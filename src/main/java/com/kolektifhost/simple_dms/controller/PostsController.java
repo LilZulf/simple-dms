@@ -38,7 +38,7 @@ public class PostsController {
     @GetMapping
     public ResponseEntity<ResponseData<List<Posts>>> findAll() {
         List<Posts> posts = postsService.findAll();
-        return ResponseEntity.ok(new ResponseData<>(true, "Users retrieved successfully", 200, posts));
+        return ResponseEntity.ok(new ResponseData<>(true, "Posts retrieved successfully", 200, posts));
     }
 
     @GetMapping("/{id}")
