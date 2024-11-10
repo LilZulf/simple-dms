@@ -42,10 +42,6 @@ public class PostRequest {
         this.title = title;
     }
 
-
-
-   
-
     /**
      * @return String return the content
      */

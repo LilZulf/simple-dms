@@ -5,18 +5,16 @@
 
 package com.kolektifhost.simple_dms.repository;
 
-import java.util.Set;
+import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.kolektifhost.simple_dms.entity.Roles;
-import com.kolektifhost.simple_dms.entity.Users;
 
 /**
  *
  * @author najib
  */
-public interface UsersRepository extends JpaRepository<Users, Long> {
-    Users findByUsername(String username);
-    Set<Roles> findByRolesId(Long id);
+public interface RolesRepository extends JpaRepository<Roles, Long> {
+    Optional<Roles> findByName(String name); 
 }
