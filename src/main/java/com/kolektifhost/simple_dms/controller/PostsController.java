@@ -35,12 +35,27 @@ public class PostsController {
     @Autowired
     private PostsService postsService;
 
+    /**
+     * Handles the HTTP GET request to retrieve all posts.
+     *
+     * @return a ResponseEntity containing a ResponseData object with a list of
+     * all posts, a success status, message, and HTTP status code.
+     */
     @GetMapping
     public ResponseEntity<ResponseData<List<Posts>>> findAll() {
         List<Posts> posts = postsService.findAll();
         return ResponseEntity.ok(new ResponseData<>(true, "Posts retrieved successfully", 200, posts));
     }
 
+    /**
+     * Handles the HTTP GET request to retrieve a post by its ID.
+     * 
+     * @param id the ID of the post to retrieve
+     * @return a ResponseEntity containing a ResponseData object with the post
+     *         with the specified ID, a success status, message, and HTTP status
+     *         code. If the post is not found, a 404 status and a null post is
+     *         returned.
+     */
     @GetMapping("/{id}")
     public ResponseEntity<ResponseData<Posts>> getPostById(@PathVariable Long id) {
         Posts post = postsService.getById(id);
@@ -50,6 +65,14 @@ public class PostsController {
         return ResponseEntity.ok(new ResponseData<>(true, "Post retrieved successfully", 200, post));
     }
 
+    /**
+     * Handles the HTTP POST request to save a post.
+     * 
+     * @param post the body of the request containing the post to save
+     * @return a ResponseEntity containing a ResponseData object with the saved
+     *         post, a success status, message, and HTTP status code. If the
+     *         post cannot be saved, a 500 status and a null post is returned.
+     */
     @PostMapping
     public ResponseEntity<ResponseData<Posts>> savePost(@Valid @RequestBody PostRequest post) {
         try {
@@ -60,6 +83,15 @@ public class PostsController {
         }
     }
 
+    /**
+     * Handles the HTTP PUT request to update a post.
+     * 
+     * @param id  the ID of the post to update
+     * @param post the body of the request containing the post to update
+     * @return a ResponseEntity containing a ResponseData object with the updated
+     *         post, a success status, message, and HTTP status code. If the post
+     *         cannot be updated, a 500 status and a null post is returned.
+     */
     @PutMapping("/{id}")
     public ResponseEntity<ResponseData<Posts>> updatePost(@PathVariable Long id, @Valid @RequestBody PostRequest post) {
         try {
@@ -71,6 +103,14 @@ public class PostsController {
         }
     }
 
+    /**
+     * Handles the HTTP DELETE request to delete a post.
+     * 
+     * @param id the ID of the post to delete
+     * @return a ResponseEntity containing a ResponseData object with the deleted
+     *         post, a success status, message, and HTTP status code. If the post
+     *         cannot be deleted, a 500 status and a null post is returned.
+     */
     @DeleteMapping("/{id}")
     public ResponseEntity<ResponseData<Posts>> deletePost(@PathVariable Long id) {
         try {

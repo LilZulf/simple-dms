@@ -25,7 +25,7 @@ public class Users {
     private String password;
 
     @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "users_roles",
+    @JoinTable(name = "user_roles",
             joinColumns = @jakarta.persistence.JoinColumn(name = "user_id"),
             inverseJoinColumns = @jakarta.persistence.JoinColumn(name = "role_id"))
     private Set<Roles> roles;

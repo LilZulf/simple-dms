@@ -23,6 +23,11 @@ import com.kolektifhost.simple_dms.dto.ResponseData;
 public class ValidationExceptionHandler {
 
    
+    /**
+     * Handle MethodArgumentNotValidException by returning a ResponseEntity containing
+     * a ResponseData object with the validation errors. The errors are stored in a
+     * Map with the field name as the key and the error message as the value.
+     */
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<ResponseData<Map<String, String>>> handleValidationExceptions(MethodArgumentNotValidException ex) {
         Map<String, String> errors = new HashMap<>();

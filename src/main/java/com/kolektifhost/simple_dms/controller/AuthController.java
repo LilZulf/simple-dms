@@ -29,6 +29,12 @@ public class AuthController {
     @Autowired
     private AuthService authService;
 
+    /**
+     * Handle login request
+     * 
+     * @param loginRequest the body of request
+     * @return ResponseData with status and message
+     */
     @PostMapping("/login")
     public ResponseEntity<ResponseData<String>> login(@Valid @RequestBody LoginRequest loginRequest) {
         try {
@@ -39,6 +45,12 @@ public class AuthController {
         }
     }
 
+    /**
+     * Handle registration request
+     * 
+     * @param registerRequest the body of request containing username, password, and email
+     * @return ResponseData with status, message, and token if registration is successful
+     */
     @PostMapping("/register")
     public ResponseEntity<ResponseData<String>> register(@Valid @RequestBody RegisterRequest registerRequest) {
         try {

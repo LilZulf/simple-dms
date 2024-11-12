@@ -5,6 +5,7 @@
 package com.kolektifhost.simple_dms.utils;
 
 import java.io.IOException;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -34,17 +35,41 @@ public class JwtFilter extends OncePerRequestFilter {
     @Autowired
     private UsersService usersService;
 
+    private final List<String> publicPaths = List.of("/auth/register", "/auth/login");
+
+
+    /**
+     * Filters the incoming HTTP requests and checks for a valid JWT token. If the
+     * token is valid, it sets the Spring Security context with the user details.
+     * 
+     * @param request  the incoming HTTP request
+     * @param response the outgoing HTTP response
+     * @param chain    the filter chain
+     * 
+     * @throws IOException      if an I/O error occurs
+     * @throws ServletException if a servlet error occurs
+     */
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain)
             throws ServletException, IOException {
         final String authorizationHeader = request.getHeader("Authorization");
 
+
+        String requestPath = request.getServletPath();
+
+        // Skip JWT validation for public paths
+        if (publicPaths.contains(requestPath)) {
+            chain.doFilter(request, response);
+            return;
+        }
+        
         String username = null;
         String jwt = null;
 
         if (authorizationHeader != null && authorizationHeader.startsWith("Bearer ")) {
             jwt = authorizationHeader.substring(7);
             username = jwtUtils.extractUsername(jwt);
+            logger.info("Username: " + username);
         }
 
         if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {

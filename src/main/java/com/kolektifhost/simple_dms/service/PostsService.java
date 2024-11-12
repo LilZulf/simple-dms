@@ -81,6 +81,12 @@ public class PostsService {
         return posts;
     }
 
+    /**
+     * Soft deletes a post by setting its is_active field to false.
+     *
+     * @param posts the post to soft delete
+     * @return the soft deleted post
+     */
     public Posts softDeletePosts(Posts posts) {
         posts.setIs_active(false);
         return postsRepository.save(posts);
