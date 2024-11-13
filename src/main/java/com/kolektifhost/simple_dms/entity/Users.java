@@ -1,5 +1,6 @@
 package com.kolektifhost.simple_dms.entity;
 
+import java.util.List;
 import java.util.Set;
 
 import jakarta.persistence.Column;
@@ -10,6 +11,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -29,6 +31,9 @@ public class Users {
             joinColumns = @jakarta.persistence.JoinColumn(name = "user_id"),
             inverseJoinColumns = @jakarta.persistence.JoinColumn(name = "role_id"))
     private Set<Roles> roles;
+
+    @OneToMany(mappedBy = "user")
+    private List<Posts> posts;
     
     public Users() {
     }
@@ -78,6 +83,21 @@ public class Users {
      */
     public void setRoles(Set<Roles> roles) {
         this.roles = roles;
+    }
+
+
+    /**
+     * @return List<Posts> return the posts
+     */
+    public List<Posts> getPosts() {
+        return posts;
+    }
+
+    /**
+     * @param posts the posts to set
+     */
+    public void setPosts(List<Posts> posts) {
+        this.posts = posts;
     }
 
 }

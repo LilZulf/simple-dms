@@ -11,7 +11,10 @@ import org.springframework.stereotype.Service;
 
 import com.kolektifhost.simple_dms.dto.PostRequest;
 import com.kolektifhost.simple_dms.entity.Posts;
+import com.kolektifhost.simple_dms.entity.Users;
+import com.kolektifhost.simple_dms.projection.PostProjection;
 import com.kolektifhost.simple_dms.repository.PostsRepository;
+import com.kolektifhost.simple_dms.repository.UsersRepository;
 
 /**
  *
@@ -22,6 +25,9 @@ public class PostsService {
 
     @Autowired
     private PostsRepository postsRepository;
+
+    @Autowired
+    private UsersRepository usersRepository;
 
     /**
      * Retrieves all posts from the repository.
@@ -60,7 +66,11 @@ public class PostsService {
             posts = new Posts();
         }
 
-        posts.setUserId(postsRequest.getUser_id());
+        Users user = usersRepository.findById(postsRequest.getUser_id())
+                .orElseThrow(() -> new RuntimeException("User not found"));
+        posts.setUser(user);
+
+        
         posts.setTitle(postsRequest.getTitle());
         posts.setContent(postsRequest.getContent());
 
@@ -90,6 +100,36 @@ public class PostsService {
     public Posts softDeletePosts(Posts posts) {
         posts.setIs_active(false);
         return postsRepository.save(posts);
+    }
+
+
+    /**
+     * Retrieves a post by its slug from the repository.
+     * 
+     * @param slug the slug of the post to retrieve
+     * @return the post with the specified slug, or null if not found
+     */
+    public Posts getPostBySlug(String slug) {
+        return postsRepository.findBySlug(slug);
+    }
+
+    /**
+     * Retrieves a post by its ID from the repository, along with its associated user.
+     * 
+     * @param id the ID of the post to retrieve
+     * @return the post with the specified ID, or null if not found
+     */
+    public Posts getPostByIdWithUser(Long id) {
+        return postsRepository.findByIdWithUser(id);
+    }
+
+    /**
+     * Retrieves all posts from the repository, along with their associated users.
+     *
+     * @return a list of all posts, each with their associated user
+     */
+    public List<PostProjection> findAllWithUser() {
+        return postsRepository.findAllWithUser();
     }
 
 }

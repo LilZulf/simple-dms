@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.kolektifhost.simple_dms.dto.PostRequest;
 import com.kolektifhost.simple_dms.dto.ResponseData;
 import com.kolektifhost.simple_dms.entity.Posts;
+import com.kolektifhost.simple_dms.projection.PostProjection;
 import com.kolektifhost.simple_dms.service.PostsService;
 
 import jakarta.validation.Valid;
@@ -42,8 +43,8 @@ public class PostsController {
      * all posts, a success status, message, and HTTP status code.
      */
     @GetMapping
-    public ResponseEntity<ResponseData<List<Posts>>> findAll() {
-        List<Posts> posts = postsService.findAll();
+    public ResponseEntity<ResponseData<List<PostProjection>>> findAll() {
+        List<PostProjection> posts = postsService.findAllWithUser();
         return ResponseEntity.ok(new ResponseData<>(true, "Posts retrieved successfully", 200, posts));
     }
 
