@@ -21,4 +21,7 @@ public interface MaterialsRepository extends JpaRepository<Materials, Long> {
 
     @Query("SELECT m FROM Materials m JOIN FETCH m.materialType JOIN FETCH m.unitOfMeasurement WHERE m.isActive = true")
     List<MaterialProjection> findAllActive();
+
+    @Query("SELECT m FROM Materials m JOIN FETCH m.materialType JOIN FETCH m.unitOfMeasurement WHERE m.id = ?1 AND m.isActive = true")
+    MaterialProjection findByIdMaterial(Long id);
 }
