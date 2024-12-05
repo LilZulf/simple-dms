@@ -33,7 +33,7 @@ public class CompanyAdresses {
 
     @ManyToOne
     @JoinColumn(name = "company_id")
-    private Long companyId;
+    private Companies companyId;
 
     @Column(name = "address", nullable = false)
     private String address;
@@ -41,17 +41,20 @@ public class CompanyAdresses {
     @Column(name="address_type", nullable = false)
     private String addressType;
 
-    @Column(name = "city", nullable = false)
+    @Column(name = "city", nullable = true)
     private String city;
 
-    @Column(name = "country", nullable = false)
+    @Column(name = "country", nullable = true)
     private String country;
 
-    @Column(name = "zip_code", nullable = false)
+    @Column(name = "state", nullable = true)
+    private String state;
+
+    @Column(name = "zip_code", nullable = true)
     private String zipCode;
 
-    @Column(name = "isActive", nullable = false)
-    private boolean isActive = true;
+    @Column(name = "is_active", nullable = false)
+    private boolean is_active = true;
     
     @CreatedDate
     @Column(name = "createdAt", nullable = false)
@@ -64,15 +67,16 @@ public class CompanyAdresses {
     public CompanyAdresses() {
     }
 
-    public CompanyAdresses(Long id, Long companyId, String address, String addressType, String city, String country, String zipCode, boolean isActive) {
+    public CompanyAdresses(Long id, Companies companyId, String address, String addressType, String city, String country, String state, String zipCode, boolean is_active) {
         this.id = id;
         this.companyId = companyId;
         this.address = address;
         this.addressType = addressType;
         this.city = city;
         this.country = country;
+        this.state = state;
         this.zipCode = zipCode;
-        this.isActive = isActive;
+        this.is_active = is_active;
     }
 
     /**
@@ -92,14 +96,14 @@ public class CompanyAdresses {
     /**
      * @return Long return the companyId
      */
-    public Long getCompanyId() {
+    public Companies getCompanyId() {
         return companyId;
     }
 
     /**
      * @param companyId the companyId to set
      */
-    public void setCompanyId(Long companyId) {
+    public void setCompanyId(Companies companyId) {
         this.companyId = companyId;
     }
 
@@ -174,17 +178,17 @@ public class CompanyAdresses {
     }
 
     /**
-     * @return boolean return the isActive
+     * @return boolean return the is_active
      */
-    public boolean isIsActive() {
-        return isActive;
+    public boolean getis_active() {
+        return is_active;
     }
 
     /**
-     * @param isActive the isActive to set
+     * @param is_active the is_active to set
      */
-    public void setIsActive(boolean isActive) {
-        this.isActive = isActive;
+    public void setis_active(boolean is_active) {
+        this.is_active = is_active;
     }
 
     /**
@@ -214,6 +218,21 @@ public class CompanyAdresses {
      */
     public void setUpdatedAt(LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
+    }
+
+
+    /**
+     * @return String return the state
+     */
+    public String getState() {
+        return state;
+    }
+
+    /**
+     * @param state the state to set
+     */
+    public void setState(String state) {
+        this.state = state;
     }
 
 }

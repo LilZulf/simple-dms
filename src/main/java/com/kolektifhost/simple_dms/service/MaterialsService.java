@@ -70,14 +70,14 @@ public class MaterialsService {
         material.setCode(materialsRequest.getCode());
         material.setName(materialsRequest.getName());
         material.setDescription(materialsRequest.getDescription().orElse(""));
-        material.setIsActive(true);
+        material.setis_active(true);
 
         return materialsRepository.save(material);
     }
 
     public Materials deleteMaterials(Long id) {
         Materials material = materialsRepository.findById(id).get();
-        material.setIsActive(false);
+        material.setis_active(false);
         return materialsRepository.save(material);
     }
 

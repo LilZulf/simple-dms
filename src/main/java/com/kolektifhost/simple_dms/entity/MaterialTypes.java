@@ -35,8 +35,8 @@ public class MaterialTypes {
     @Column(name = "name", nullable = false, length=100)
     private String name;
 
-    @Column(name = "isActive", nullable = false)
-    private boolean isActive = true;
+    @Column(name = "is_active", nullable = false)
+    private boolean is_active = true;
 
     @CreatedDate
     @Column(updatable = false, nullable = false)
@@ -49,11 +49,11 @@ public class MaterialTypes {
     public MaterialTypes() {
     }
 
-    public MaterialTypes(Long id, String code, String name, boolean isActive) {
+    public MaterialTypes(Long id, String code, String name, boolean is_active) {
         this.id = id;
         this.code = code;
         this.name = name;
-        this.isActive = isActive;
+        this.is_active = is_active;
     }
 
     /**
@@ -99,17 +99,17 @@ public class MaterialTypes {
     }
 
     /**
-     * @return boolean return the isActive
+     * @return boolean return the is_active
      */
-    public boolean isIsActive() {
-        return isActive;
+    public boolean getis_active() {
+        return is_active;
     }
 
     /**
-     * @param isActive the isActive to set
+     * @param is_active the is_active to set
      */
-    public void setIsActive(boolean isActive) {
-        this.isActive = isActive;
+    public void setis_active(boolean is_active) {
+        this.is_active = is_active;
     }
 
     /**

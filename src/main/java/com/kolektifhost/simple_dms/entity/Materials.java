@@ -46,7 +46,7 @@ public class Materials {
     private String description;
 
     @Column(nullable = false)
-    private boolean isActive = true; 
+    private boolean is_active = true; 
 
     @ManyToOne
     @JoinColumn(name = "material_type_id")
@@ -69,12 +69,12 @@ public class Materials {
         
     }
 
-    public Materials(Long id, String code, String name, String description, boolean isActive) {
+    public Materials(Long id, String code, String name, String description, boolean is_active) {
         this.id = id;
         this.code = code;
         this.name = name;
         this.description = description;
-        this.isActive = isActive;
+        this.is_active = is_active;
     }
     /**
      * @return Long return the id
@@ -133,17 +133,17 @@ public class Materials {
     }
 
     /**
-     * @return boolean return the isActive
+     * @return boolean return the is_active
      */
-    public boolean isIsActive() {
-        return isActive;
+    public boolean getis_active() {
+        return is_active;
     }
 
     /**
-     * @param isActive the isActive to set
+     * @param is_active the is_active to set
      */
-    public void setIsActive(boolean isActive) {
-        this.isActive = isActive;
+    public void setis_active(boolean is_active) {
+        this.is_active = is_active;
     }
 
     public LocalDateTime getUpdatedAt() {

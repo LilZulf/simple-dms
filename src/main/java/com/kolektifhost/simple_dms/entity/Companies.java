@@ -45,14 +45,14 @@ public class Companies {
     @JoinColumn(name = "company_type_id")
     private CompanyTypes companyType;
 
-    @Column(name = "email", nullable = false)
+    @Column(name = "email", nullable = true)
     private String email;
     
-    @Column(name = "phone", nullable = false)
+    @Column(name = "phone", nullable = true)
     private String phone;
     
-    @Column(name = "isActive")
-    private boolean isActive = true;
+    @Column(name = "is_active")
+    private boolean is_active = true;
 
     @CreatedDate
     @Column(updatable = false, nullable = false)
@@ -148,17 +148,17 @@ public class Companies {
     }
 
     /**
-     * @return boolean return the isActive
+     * @return boolean return the is_active
      */
-    public boolean isIsActive() {
-        return isActive;
+    public boolean getis_active() {
+        return is_active;
     }
 
     /**
-     * @param isActive the isActive to set
+     * @param is_active the is_active to set
      */
-    public void setIsActive(boolean isActive) {
-        this.isActive = isActive;
+    public void setis_active(boolean is_active) {
+        this.is_active = is_active;
     }
 
     /**

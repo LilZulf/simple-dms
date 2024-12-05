@@ -21,7 +21,7 @@ CREATE TABLE materials (
     unit_of_measurement_id INT NOT NULL,
     description VARCHAR(255),
     image VARCHAR(255),
-    isActive BOOLEAN DEFAULT TRUE,
+    is_active BOOLEAN DEFAULT TRUE,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (material_type_id) REFERENCES material_types(id),

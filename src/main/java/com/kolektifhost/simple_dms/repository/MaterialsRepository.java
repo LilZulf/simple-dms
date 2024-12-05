@@ -19,9 +19,9 @@ import com.kolektifhost.simple_dms.projection.MaterialProjection;
  */
 public interface MaterialsRepository extends JpaRepository<Materials, Long> {
 
-    @Query("SELECT m FROM Materials m JOIN FETCH m.materialType JOIN FETCH m.unitOfMeasurement WHERE m.isActive = true")
+    @Query("SELECT m FROM Materials m JOIN FETCH m.materialType JOIN FETCH m.unitOfMeasurement WHERE m.is_active = true")
     List<MaterialProjection> findAllActive();
 
-    @Query("SELECT m FROM Materials m JOIN FETCH m.materialType JOIN FETCH m.unitOfMeasurement WHERE m.id = ?1 AND m.isActive = true")
+    @Query("SELECT m FROM Materials m JOIN FETCH m.materialType JOIN FETCH m.unitOfMeasurement WHERE m.id = ?1 AND m.is_active = true")
     MaterialProjection findByIdMaterial(Long id);
 }
